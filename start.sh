@@ -76,13 +76,13 @@ export alias -g tool='Tool-X'
 # ensure python is working and then alias
 function pton() {
     if [ -f /data/data/com.termux/files/usr/bin/python ]; then
-        alias pton='python'
+        alias -g pton='python'
     elif [ -f /data/data/com.termux/files/usr/bin/python2 ]; then
-        alias pton='python2'
+        alias -g pton='python2'
     elif [ -f /data/data/com.termux/files/usr/bin/python3 ]; then
-        alias pton='python3'
+        alias -g pton='python3'
     else
-        echo "python not found"
+        echo "python not found" && exit 1
     fi
 }
 
