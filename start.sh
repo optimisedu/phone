@@ -15,8 +15,6 @@
 
 set -o errexit
 
-shopt -s globstar >>~/.bashrc
-
 export LD_PRELOAD=${PREFIX}/lib/libtermux-exec.so
 termux-setup-storage
 RSYNC_PASSWORD=termuxmirror rsync -a --delete rsync@grimler.se::termux termux &&echo mirror synced
