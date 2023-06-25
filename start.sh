@@ -1,4 +1,5 @@
 #! bin/bash
+
 # basic termux setup
 # First get fast repos and upgrade pkgs
 # Changelog: 25/06/20203
