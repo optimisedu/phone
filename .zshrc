@@ -1,6 +1,6 @@
-#termux zshrc with omzsh and p10k
 #speedtest
 # If you come from bash you might have to change your $PATH.
+
  export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
@@ -117,9 +117,8 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="mate ~/.zshrc"
- alias ohmyzsh="mate ~/.oh-my-zsh"
- alias tool="Tool-X"
+ alias -g zshconfig="mate ~/.zshrc"
+ alias -g tool="Tool-X"
 
 function pton() {
     if [ -f /data/data/com.termux/files/usr/bin/python ]; then
