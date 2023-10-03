@@ -2,10 +2,14 @@
 
 # basic termux setup
 # First get fast repos and upgrade pkgs
-# Changelog: 25/06/20203
-# --error handling
+# Changelog: 03/09/2023
+# 1. added github + gh
+# 2. added and updated aptitude pkgmanager
+# 
 #
 # todo:
+# -- add ffmpg
+# -- add aliases and functions
 # --add arch and ubuntu optional
 # --add homebrew
 # --add ssh
@@ -33,6 +37,13 @@ pkg install x11-repo -y
 pkg install root-repo -y
 pkg install termux-api -y
 pkg install termux-tools -y
+pkg install gh -y
+pkg install github -y
+pkg intall apt -y
+apt update -y
+apt upgrade -y
+pkg install node -y
+pkg install 
 # check for bash and zsh, if not found, create them
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
@@ -89,7 +100,4 @@ function pton() {
 echo syntax-highlighting and aliases successful \n
 echo run tool to install further tools \n
 echo arch and ubuntu config coming. Real OS needed for Homebrew \n
-echo tool option 255 is metasploit \n
-echo now setup vncserver -localhost \n
-echo then run fluxbox \n
-echo fluxbox-generate_menu \n
+n
