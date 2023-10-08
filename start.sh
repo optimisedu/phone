@@ -56,7 +56,7 @@ pkg install -y git
 pkg install -y zsh
 pkg install -y curl libcurl wget
 #languages
-pkg install -y python python3 ruby nodejs php
+pkg install -y python python3 ruby nodejs php8.1 php-cli
 python -m ensurepip --upgrade
 pkg install -y neofetch
 pkg install -y openssh
@@ -65,6 +65,14 @@ pkg install -y openssl-tool
 pkg install -y openssl-dev
 pkg install -y tigervnc
 pkg install -y fluxbox
+
+
+#create .zshrc
+if [ -f ~/.. ]; then
+    . ~/.zshrc
+    else 
+        touch .zshrc && echo bashrc created
+fi
 
 # infinitely extendable with Tool-X, but hard to use on the phone
 pkg install -y Tool-X
