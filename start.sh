@@ -55,17 +55,28 @@ fi
 pkg install -y git
 pkg install -y zsh
 pkg install -y curl libcurl wget
+#install generic colorizer
+pkg install -y gcc
 #languages
 pkg install -y python python3 ruby nodejs php8.1 php-cli
 python -m ensurepip --upgrade
 pkg install -y neofetch
+pkg install -y ffmpeg
 pkg install -y openssh
 pkg install -y openssl
 pkg install -y openssl-tool
 pkg install -y openssl-dev
-pkg install -y tigervnc
-pkg install -y fluxbox
+pkg install -y libcurl curl
+pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
 
+#sync pacman
+pacman -Syu $PACKAGES --needed --noconfirm
+
+tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
+
+#install base repos
+pkg install -y root-repo
+pkg install -y x11-repo
 
 #create .zshrc
 if [ -f ~/.. ]; then
@@ -77,17 +88,31 @@ fi
 # infinitely extendable with Tool-X, but hard to use on the phone
 pkg install -y Tool-X
 
+# build cache
+adb shell "content call --uri content://settings/config --method LIST_config"
+adb shell "content call --uri content://settings/config --method LIST_config | tr , '\n' | grep activity_manager/"
+adb shell "content call --uri content://settings/config --method GET_config --arg 'activity_manager/max_cached_processes'"
+adb shell "content call --uri content://settings/config --method PUT_config --arg 'activity_manager/max_cached_processes' --extra 'value:s:64'"
+adb shell "content call --uri content://settings/config --method DELETE_config --arg 'activity_manager/max_cached_processes'"
+
+#add funtions and aliases
+source ~/.bash_functions >>~/.bashrc
+source ~/.bash_aliases >>~/.bashrc
+
 #Change shell to zsh
 chsh -s zsh
-# install p10k manual
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k  # switch gitee for github if for a slight extra security level(chinese mirror)
-source '~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
 # install zsh-autosuggestions manually (opt out for slow phones)
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh >>~/.zshrc
+
 # install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh >>~/.zshrc
+
+source ~/.bash_functions >>~/.zshrc
+source ~/.bash_aliases >>~/.zshrc
+
 
 #aliases
 export alias -g tool='Tool-X'
@@ -104,6 +129,11 @@ function pton() {
     fi
 }
 
+# install p10k manual
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k  # switch gitee for github if for a slight extra security level(chinese mirror)
+source '~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+#&& configure
+p10k configure
 
 echo syntax-highlighting and aliases successful \n
 echo run tool to install further tools \n
