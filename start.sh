@@ -5,12 +5,14 @@
 # Changelog: 03/09/2023
 # 1. added github + gh
 # 2. added and updated aptitude pkgmanager
-# 
+# 3. setup storage
+[
 #
 # todo:
-# -- add ffmpg
-# -- add aliases and functions
-# --add arch and ubuntu optional
+# -- add ffmpg[x]
+# -- add aliases and functions[x]
+# -- add .nanorc
+# --add ubuntu optional
 # --add homebrew
 # --add ssh
 # --add ssh keygen
