@@ -1,7 +1,10 @@
 #! bin/bash
 
-#REQUIEMENT(S)
-#1. GITHUB (pkg install github git gh -y) needed to clone
+echo REQUIEMENT(S)
+echo 1. GITHUB (pkg install github git gh -y) needed to clone
+echo 2. LATEST TERMUX FROM FDROID NOT APP STORE
+
+
 
 # basic termux setup
 # First get fast repos and upgrade pkgs
@@ -47,16 +50,26 @@ fi
 
 
 pkg update && pkg upgrade -y
-pkg install x11-repo -y
-pkg install root-repo -y
+#install base repos
+pkg install -y root-repo
+pkg install -y x11-repo
+
+# optional - termux apo and tools from fdroid required 
 pkg install termux-api -y
 pkg install termux-tools -y
+
 pkg install gh -y
 pkg intall apt -y
 apt update -y
 apt upgrade -y
 pkg install node -y
-pkg install 
+
+# useful
+pkg install walk -y
+pkg install bat -y
+
+#TODO BAT CONFIG AND FZF
+
 # check for bash and zsh, if not found, create them
 if [ -f ~/.bashrc ]; then
     ~/.bashrc
@@ -91,10 +104,6 @@ pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/fi
 
 # if sd function requirements i
 #tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
-
-#install base repos
-pkg install -y root-repo
-pkg install -y x11-repo
 
 #create .zshrc
 touch .zshrc .bashrc
