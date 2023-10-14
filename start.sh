@@ -22,6 +22,9 @@ echo 2. LATEST TERMUX FROM FDROID NOT APP STORE
 # -- add .nanorc
 # --add ubuntu optional
 # --add homebrew
+# ADVANCED TODO:
+# --add and configure bat (cat alternative), --Replace walk with FZF. This might best be done as a single script.
+# --Add a Neovim/Emacs setup
 # --add ssh
 # --add ssh keygen
 # --add ssh-copy-id
@@ -66,9 +69,10 @@ pkg install node -y
 
 # useful
 pkg install walk -y
-pkg install bat -y
 
 #TODO BAT CONFIG AND FZF
+pkg install bat -y #very useful, but not configured in this basic setup.
+pkg install ripgrep -y
 
 # check for bash and zsh, if not found, create them
 if [ -f ~/.bashrc ]; then
@@ -76,6 +80,8 @@ if [ -f ~/.bashrc ]; then
     else 
         touch .bashrc && echo bashrc created
 fi
+#time to get interesting
+pkg install zsh -y
 if [ -f ~/.zshrc ]; then
     ~/.bashrc
     else 
@@ -83,21 +89,22 @@ if [ -f ~/.zshrc ]; then
 fi
 # barbones setup
 pkg install -y git
-pkg install -y zsh
-pkg install -y curl libcurl wget
+pkg install build-essential -y
+pkg install curl libcurl wget -y
 #install generic colorizer
-pkg install -y gcc
+pkg install -y gcc -y
 #languages
-pkg install -y python python3 ruby nodejs php8.1 php-cli
-python -m ensurepip --upgrade
-pkg install -y neofetch
-pkg install -y ffmpeg
-pkg install -y openssh
-pkg install -y openssl
-pkg install -y openssl-tool
-pkg install -y openssl-dev
-pkg install -y libcurl curl
-pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
+pkg install -y python python3 ruby nodejs php8.1 php-cli  -y
+python -m ensurepip --upgrade  -y
+pkg install -y neofetch  -y
+pkg install -y ffmpeg  -y
+pkg install -y openssh  -y
+pkg install -y openssl  -y
+pkg install -y openssl-tool  -y
+pkg install -y openssl-dev  -y
+
+#optional for SD CARD users. This is to be tested at a later date
+# pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions 
 
 #sync pacman
 #pacman -Syu $PACKAGES --needed --noconfirm
@@ -107,6 +114,7 @@ pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/fi
 
 #create .zshrc
 touch .zshrc .bashrc
+
 if [ -f .nanorc]
 echo nano already setup
 else
@@ -126,15 +134,15 @@ chsh -s zsh
 
 # install zsh-autosuggestions manually (opt out for slow phones)
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh >>~/.zshrc
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh > >~/.zshrc
 
 # install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh >>~/.zshrc
 
 #source some base aliasing
-source ~/phone/.bash_functions >>~/.zshrc
-source ~/phone/.bash_aliases >>~/.zshrc
+source ~/phone/.bash_functions >> ~/.zshrc
+source ~/phone/.bash_aliases >> ~/.zshrc
 
 
 #aliases
