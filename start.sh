@@ -1,8 +1,8 @@
 #! bin/bash
 
-echo REQUIEMENT(S)
-echo 1. GITHUB (pkg install github git gh -y) needed to clone
-echo 2. LATEST TERMUX FROM FDROID NOT APP STORE
+echo REQUIEMENTS \n 
+echo 1. GITHUB pkg install github git gh -y needed to clone \n
+echo 2. LATEST TERMUX FROM FDROID NOT APP STORE \n
 
 
 
