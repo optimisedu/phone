@@ -27,8 +27,13 @@
 
 set -o errexit
 
+# return to base dir
 cd ~
 
+# Vibrate device (default).
+bell-character=vibrate
+
+# prefixing needs some adjustments 
 export LD_PRELOAD=${PREFIX}/lib/libtermux-exec.so
 termux-setup-storage
 RSYNC_PASSWORD=termuxmirror rsync -a --delete rsync@grimler.se::termux termux &&echo mirror synced
@@ -54,11 +59,15 @@ pkg install node -y
 pkg install 
 # check for bash and zsh, if not found, create them
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+    ~/.bashrc
     else 
         touch .bashrc && echo bashrc created
 fi
-
+if [ -f ~/.zshrc ]; then
+    ~/.bashrc
+    else 
+        touch .zshrc && echo zshrc created
+fi
 # barbones setup
 pkg install -y git
 pkg install -y zsh
@@ -80,6 +89,7 @@ pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/fi
 #sync pacman
 #pacman -Syu $PACKAGES --needed --noconfirm
 
+# if sd function requirements i
 #tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
 
 #install base repos
