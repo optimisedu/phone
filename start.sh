@@ -1,14 +1,19 @@
 #! bin/bash
 
+#REQUIEMENT(S)
+#1. GITHUB (pkg install github git gh -y) needed to clone
+
 # basic termux setup
 # First get fast repos and upgrade pkgs
 # Changelog: 03/09/2023
-# 1. added github + gh
+# 1. added github + gh (14/10/2023) required preinstall
 # 2. added and updated aptitude pkgmanager
 # 3. setup storage
-[
-#
-# todo:
+# 4. RC file setup corrected
+# 5. Nano config test + Todo 
+
+#############################################
+# TODO:
 # -- add ffmpg[x]
 # -- add aliases and functions[x]
 # -- add .nanorc
@@ -21,6 +26,8 @@
 # -- GUI AND FLUTTERBOX
 
 set -o errexit
+
+cd ~
 
 export LD_PRELOAD=${PREFIX}/lib/libtermux-exec.so
 termux-setup-storage
@@ -40,7 +47,6 @@ pkg install root-repo -y
 pkg install termux-api -y
 pkg install termux-tools -y
 pkg install gh -y
-pkg install github -y
 pkg intall apt -y
 apt update -y
 apt upgrade -y
@@ -72,21 +78,20 @@ pkg install -y libcurl curl
 pkg install -y tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
 
 #sync pacman
-pacman -Syu $PACKAGES --needed --noconfirm
+#pacman -Syu $PACKAGES --needed --noconfirm
 
-tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
+#tar -zxf /sdcard/termux-backup.tar.gz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions
 
 #install base repos
 pkg install -y root-repo
 pkg install -y x11-repo
 
 #create .zshrc
-if [ -f ~/.. ]; then
-    . ~/.zshrc
-    else 
-        touch .zshrc && echo bashrc created
-fi
-
+touch .zshrc .bashrc
+if [ -f .nanorc]
+echo nano already setup
+else
+touch .nanorc && echo nanorc created
 # infinitely extendable with Tool-X, but hard to use on the phone
 pkg install -y Tool-X
 
@@ -96,10 +101,6 @@ adb shell "content call --uri content://settings/config --method LIST_config | t
 adb shell "content call --uri content://settings/config --method GET_config --arg 'activity_manager/max_cached_processes'"
 adb shell "content call --uri content://settings/config --method PUT_config --arg 'activity_manager/max_cached_processes' --extra 'value:s:64'"
 adb shell "content call --uri content://settings/config --method DELETE_config --arg 'activity_manager/max_cached_processes'"
-
-#add funtions and aliases
-source ~/.bash_functions >>~/.bashrc
-source ~/.bash_aliases >>~/.bashrc
 
 #Change shell to zsh
 chsh -s zsh
@@ -112,8 +113,9 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh >>~/.zshrc
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh >>~/.zshrc
 
-source ~/.bash_functions >>~/.zshrc
-source ~/.bash_aliases >>~/.zshrc
+#source some base aliasing
+source ~/phone/.bash_functions >>~/.zshrc
+source ~/phone/.bash_aliases >>~/.zshrc
 
 
 #aliases
@@ -140,4 +142,3 @@ p10k configure
 echo syntax-highlighting and aliases successful \n
 echo run tool to install further tools \n
 echo arch and ubuntu config coming. Real OS needed for Homebrew \n
-n
