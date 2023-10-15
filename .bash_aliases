@@ -12,8 +12,8 @@
 #APT+PKG
 alias pa="pkg"
 alias ap="apt"
-alias ud="update"
-alias ug="upgrade"
+alias ud="pkg update"
+alias ug="pkg upgrade"
 alias ase='apt search'
 alias pse='pkg search'
 alias bse='brew search'
