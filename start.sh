@@ -36,7 +36,9 @@ set -o errexit
 # return to base dir
 cd ~
 
-# Vibrate device (default).
+pkg i rsync -y
+
+# Vibrate device (default). - seems to throw err
 bell-character=vibrate
 
 # prefixing needs some adjustments 
@@ -44,7 +46,7 @@ export LD_PRELOAD=${PREFIX}/lib/libtermux-exec.so
 termux-setup-storage
 RSYNC_PASSWORD=termuxmirror rsync -a --delete rsync@grimler.se::termux termux &&echo mirror synced
 
-if ping -c 1 google.com; then
+if [ping -c 1 google.com] then
   echo "It appears you have a working internet connection"
 else
     echo "It appears you don't have a working internet connection"
@@ -69,6 +71,8 @@ pkg install node -y
 
 # useful
 pkg install walk -y
+pkg install lsd -y #updating the alias file to replace exa no longer supported
+pkg install htop -y #if we have an error then it helps having the kill address, will add config before install
 
 #TODO BAT CONFIG AND FZF
 pkg install bat -y #very useful, but not configured in this basic setup.
