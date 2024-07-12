@@ -64,6 +64,11 @@ alias pfzf="fzf --preview 'pistol{}'"
 #PACKAGE SPECIFIC
 alias tool='Tool-X'
 
+#PERMISSIONS
+alias 644='sudo chmod 644'
+alias 755='sudo chmod 755'
+alias 777='sudo chmod 777'
+
 #MISC
 alias read="nano README"
 alias whereami='pwd'
