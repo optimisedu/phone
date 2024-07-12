@@ -16,6 +16,15 @@ bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
 bindkey '^[[Z' undo          
 setopt glob_dots magic_equal_subst rm_star_silent rc_quotes glob_star_short
+setopt interactivecomments # allow comments in interactive mode
+setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
+setopt nonomatch           # hide error message if there is no match for the pattern
+setopt notify              # report the status of background jobs immediately
+setopt numericglobsort     # sort filenames numerically when it makes sense
+setopt promptsubst         # enable command substitution in prompt
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 
 
 zstyle ':completion:*:*:*:*:*' menu select
