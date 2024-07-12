@@ -19,6 +19,7 @@ echo 2. LATEST TERMUX FROM FDROID NOT APP STORE \n
 # TODO:
 # -- add ffmpg[x]
 # -- add aliases and functions[x]
+# -- add lsd and htop[x]
 # -- add .nanorc
 # --add ubuntu optional
 # --add homebrew
