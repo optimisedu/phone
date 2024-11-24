@@ -1,0 +1,175 @@
+###################################TERMUX ALIASES###############################
+#                                 Updated 04.10.2023
+#################################################################################
+#TODO:
+#1.: TERMUX IS A PHONE EMULATOR, AS A RESULT TYPOS AND IDIOCIES SHOULD BE EXTENDED
+#2.: ALIASES ARE LARGELY PERSONAL SO ALWAYS A WIP, IT IS STRONGLY RECOMENDED FOR YOU TO FIND YOUR OPTIMAL CONFIG
+#3.: THIS IS THE BASE FOR SETTING UP YOUR OWN CONFIG SO IT IS RECOMENDED TO FORK THIS REPO AND GIVE ME A STAR BECAUSE YOU LIKE THE STYLISH USE OF CAPITOLS, ADDITIONALLY THESE ARE THINGS I HAVE FOUND PERSONALLY USEFUL, IT IS LIKELY THAT YOU WILL FIND THAT YOU USE DIFFERENT SHORTHANDS
+#4.: ALMOST COMMITTED WITH SINGLE LETTER ALIASES, ALWAYS TEST. ADDITIONALLY FUNCTIONS ARE KEPT IN A SEPERATE FILE
+#5.: EXTEND GIT ALIASES (ALL ALIASES GIT IS JUST CURRENTLY LACKING)
+#6.: REPLACE EXA WITH LSD (PERSONAL PREFERECE)
+
+########################################### ALIAS ######################################################
+##
+#IMPORTANT IMPROVEMENTS TO MAKE
+#Check programs are available - eg exa LSD etc, with 
+#if [[ -x "$(command -v PROGRAM)" ]]; then
+#(if -executable var command)
+
+#CHANGELOG 24/11/24
+#1. ADDED A LOT OF THE CHANGES I HAVE MADE TO MY UBUNTU ALIASING
+#2. PKG AND APP UPDATE COMBINED - APUP
+#3. FIXED READ
+#4. PHP SECTION ADDED. MORE OPTIONS NEEDED, LARAVEL TODO
+
+#CHANGELOG(20/5/24)
+#1. Many typos and idiocies added
+#2. Package section improvements
+#3. nanorc jump added
+
+#CHANGELOG 1806/2024
+#1. PS SECTION OVERHAUL. UNTESTED SO BE WARENED.
+#2. LIST OF REQUIRED PROGRAMS ADDED (OR STARTED).
+
+
+
+#TODOS:
+#1. MAKE A TYPO ANALYSER TO ADD SUGGESTIONS IN YOUR ALIASING(EOU, lots of better ways to do this)
+#2. DOTFILE MANAGEMENT CONFIG
+#3. FZF F unctions and macros
+#4. BAT/CAT Functions and aliases
+#5. More package life simplification
+#6. Replace grep with pg
+
+#APT+PKG
+alias salias='source ~.alias'
+alias pa="pkg"
+alias ap="apt"
+alias apup='apt update -y && apt upgrade -y && pkg update -y && pkg upgrade -y && brew update -y'
+alias ud="pkg update"
+alias ug="pkg upgrade"
+alias ase='apt search'
+alias pse='pkg search'
+alias bse='brew search'
+alias bup='brew update'
+alias apti='apt install'
+alias pki='pkg install'
+alias bsi='brew install'
+
+#PERMISSIONS
+alias 644='sudo chmod 644'
+alias 755='sudo chmod 755'
+alias 777='sudo chmod 777'
+
+#TYPOS & IDIOCIES - Apparenlty my hashsign accuracy is pretty grim :/ - TODO MAKE A TYPO ANALYSER TO ADD SUGGESTIONS IN YOUR ALIASING(EOU, lots of better ways to do this)
+alias whereami='pwd'
+alias dc='cd'
+alias fhere="find . -name "
+
+#RC - MICRO / NVIM FUNC ON THE WAY
+alias vi='nvim'
+alias vim='nvim'
+alias zrc='nano ~/.zshrc'
+alias brc='nano ~/.bashrc'
+alias edias='nano ~/.alias'
+alias nanorc='nano ~/.nanorc'
+
+#NETWORKING
+alias ports='sudo netstat -tulanp'
+alias myip="curl http://ipecho.net/plain"
+alias download="curl -O"
+
+#DIRECTORIES & SEARCH -- LSD BY FAR THE BEST BUT EXA FOR PRE RUSTING BUILDS
+alias cd..='cd ..'
+alias ls='lsd -A --permission rwx --group-directories-first '
+alias la='lsd -a --permission rwx --group-directories-first -l -1'
+alias lt="lsd -A --permission rwx --tree depth:3" #tree listing 
+
+ #DISK USE AND SEARCH
+alias df="df -Tha --total"
+alias du="du -ach | sort -h | bat"
+alias ps="ps auxf" #lightweight htop
+alias check='free -m -l -t'
+
+#YT
+alias yta-aac="yt-dlp --ignore-config --extract-audio --audio-format aac "
+alias yta-best="yt-dlp --ignore-config --extract-audio --audio-format best "
+alias yta-flac="yt-dlp --ignore-config --extract-audio --audio-format flac "
+alias yta-m4a="yt-dlp --ignore-config --extract-audio --audio-format mp4 "
+alias yta-mp3="yt-dlp --ignore-config --extract-audio --audio-format mp3 "
+alias yta-opus="yt-dlp --ignore-config --extract-audio --audio-format opus "
+alias yta-vorbis="yt-dlp --ignore-config --extract-audio --audio-format vorbis "
+alias yta-wav="yt-dlp --ignore-config --extract-audio --audio-format wav "
+alias ytv-best="yt-dlp -f --ignore-config bestvideo+bestaudio "   
+
+#misc/vital
+alias python='python3'
+alias pypy='pypy3'
+alias pip='pip3'
+alias verscheck='python --verson && pip --verson && node --verson && npm --verson && ruby --verson && rails --version && cargo --version'
+
+#GIT
+alias gaa="git add -A"
+alias commit='git commit -a -m'
+alias gc='git clone'
+
+#PHP
+alias pserve='php -S'
+
+# vim and emacs
+alias vim="nvim"
+alias em="/usr/bin/emacs -nw"
+alias emacs="emacsclient -c -a 'emacs'"
+
+# Colorize grep output (good for log files) - PG OPT TODO
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i -f'
+
+# adding flags
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+# ps
+alias psa="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias memuse='ps auxf | sort -nr -k 4'
+alias cpuse='ps auxf | sort -nr -k 3'
+alias altmem='ps aux --sort=-%mem | head'
+alias syscheck='echo "CPU Load:"; uptime; echo "Memory Usage:"; free -h; echo "Disk Usage:"; df -h; echo "Top Processes:"; top -b -n 1 | head -15' # credit whoever wrote this - not myself. Can't find origional. Tweaks requires
+
+#fzf
+alias lfzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+
+#FZF + BAT
+#fzf + bat + pistol
+alias bfzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias mfzf="fzf --multi"
+alias efzf='fzf --exact'
+alias pfzf="fzf --preview 'pistol{}'"
+
+#PACKAGE/TERMUX SPECIFIC
+alias tool='Tool-X'
+
+#PERMISSIONS
+alias 644='sudo chmod 644'
+alias 755='sudo chmod 755'
+alias 777='sudo chmod 777'
+
+#MISC
+alias read="nano README.md"
+alias whereami='pwd'
+alias dc='cd'
+alias fhere="find . -name "
